@@ -15,7 +15,8 @@ export type AuditEvent =
   | 'SESSION_DEVICE_MISMATCH'
   | 'UNAUTHENTICATED_ACCESS'
   | 'BOOTSTRAP_RACE_DETECTED'
-  | 'FINALIZE_INVALID_SIGNATURE';
+  | 'FINALIZE_INVALID_SIGNATURE'
+  | 'APPROVAL_SIGNATURE_INVALID';
 
 export type AuditSeverity = 'INFO' | 'WARNING' | 'CRITICAL';
 
@@ -44,7 +45,7 @@ const AuditLogSchema = new Schema<IAuditLog>(
                  'DEVICE_ENROLLED_PENDING','DEVICE_APPROVED','DEVICE_DENIED',
                  'APPROVAL_REQUESTED','APPROVAL_EXPIRED','SESSION_DEVICE_MISMATCH',
                  'UNAUTHENTICATED_ACCESS','BOOTSTRAP_RACE_DETECTED',
-                 'FINALIZE_INVALID_SIGNATURE'],
+                 'FINALIZE_INVALID_SIGNATURE','APPROVAL_SIGNATURE_INVALID'],
     },
     severity:     { type: String, required: true, enum: ['INFO','WARNING','CRITICAL'], default: 'INFO' },
     userId:       { type: Schema.Types.ObjectId, ref: 'User' },

@@ -51,6 +51,36 @@ export function verifyDbkSignature(
   }
 }
 
+/**
+ * Verifies an ECDSA-SHA256 signature over an arbitrary UTF-8 message string.
+ * Used for the cryptographic approval protocol where the approver signs a
+ * canonical payload rather than a raw challenge buffer.
+ *
+ * @param dbkPublicKeyJwk  - JWK object containing the EC public key
+ * @param message          - UTF-8 string that was signed
+ * @param signatureB64     - base64url-encoded raw signature (r||s, IEEE P-1363)
+ */
+export function verifyDbkSignatureOverMessage(
+  dbkPublicKeyJwk: object,
+  message: string,
+  signatureB64: string,
+): boolean {
+  try {
+    const key    = crypto.createPublicKey({ key: dbkPublicKeyJwk as JsonWebKey, format: 'jwk' });
+    const msgBuf = Buffer.from(message, 'utf8');
+    const sigBuf = Buffer.from(signatureB64, 'base64url');
+
+    return crypto.verify(
+      'sha256',
+      msgBuf,
+      { key, dsaEncoding: 'ieee-p1363' },
+      sigBuf,
+    );
+  } catch {
+    return false;
+  }
+}
+
 // ── Internal helpers ──────────────────────────────────────────────────────────
 
 function sortObjectKeys(obj: unknown): unknown {

@@ -1,4 +1,5 @@
 import mongoose, { Schema, type Document, type Types } from 'mongoose';
+import { randomBytes } from 'crypto';
 
 export type ApprovalStatus = 'PENDING' | 'APPROVED' | 'CONSUMED' | 'DENIED' | 'EXPIRED';
 
@@ -7,6 +8,7 @@ export interface IApprovalRequest extends Document {
   requestingDeviceId:  string;
   approverDeviceId:    string;
   loginAttemptId:      string;
+  approvalNonce:       string;
   status:              ApprovalStatus;
   requestContext: {
     userAgent:   string;
@@ -15,9 +17,11 @@ export interface IApprovalRequest extends Document {
     ip:          string;
     requestedAt: Date;
   };
-  expiresAt:   Date;
-  resolvedAt?: Date;
-  createdAt:   Date;
+  expiresAt:          Date;
+  resolvedAt?:        Date;
+  createdAt:          Date;
+  approvalSignature?: string;
+  decisionPayload?:   string;
 }
 
 const ApprovalRequestSchema = new Schema<IApprovalRequest>(
@@ -26,6 +30,7 @@ const ApprovalRequestSchema = new Schema<IApprovalRequest>(
     requestingDeviceId: { type: String, required: true },
     approverDeviceId:   { type: String, required: true },
     loginAttemptId:     { type: String, required: true },
+    approvalNonce:      { type: String, required: true, default: () => randomBytes(24).toString('base64url') },
     status:             { type: String, required: true, enum: ['PENDING', 'APPROVED', 'CONSUMED', 'DENIED', 'EXPIRED'], default: 'PENDING' },
 
     requestContext: {
@@ -36,9 +41,11 @@ const ApprovalRequestSchema = new Schema<IApprovalRequest>(
       requestedAt: { type: Date,   default: () => new Date() },
     },
 
-    expiresAt:  { type: Date, required: true, default: () => new Date(Date.now() + 5 * 60 * 1000) },
-    resolvedAt: { type: Date },
-    createdAt:  { type: Date, default: () => new Date() },
+    expiresAt:         { type: Date, required: true, default: () => new Date(Date.now() + 5 * 60 * 1000) },
+    resolvedAt:        { type: Date },
+    createdAt:         { type: Date, default: () => new Date() },
+    approvalSignature: { type: String },
+    decisionPayload:   { type: String },
   },
   { _id: true },
 );

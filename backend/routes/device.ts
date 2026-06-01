@@ -4,7 +4,7 @@ import { randomUUID } from 'crypto';
 import mongoose from 'mongoose';
 import { DeviceProfile } from '../models/DeviceProfile';
 import { ApprovalRequest } from '../models/ApprovalRequest';
-import { computeDeviceId, generateDbkChallenge, verifyDbkSignature } from '../utils/crypto';
+import { computeDeviceId, generateDbkChallenge, verifyDbkSignature, verifyDbkSignatureOverMessage } from '../utils/crypto';
 import { logger } from '../utils/logger';
 
 const router = Router();
@@ -484,6 +484,9 @@ router.get('/approval/pending', requireAuthenticated, async (req: Request, res: 
       pending: pending.map(r => ({
         requestId:          (r._id as object).toString(),
         requestingDeviceId: r.requestingDeviceId,
+        approverDeviceId:   r.approverDeviceId,
+        loginAttemptId:     r.loginAttemptId,
+        approvalNonce:      r.approvalNonce,
         requestContext:     r.requestContext,
         expiresAt:          r.expiresAt,
         createdAt:          r.createdAt,
@@ -506,11 +509,15 @@ router.post('/approval/decide', requireAuthenticated, async (req: Request, res: 
       return;
     }
 
-    const { requestId, decision } =
-      req.body as { requestId?: string; decision?: 'APPROVED' | 'DENIED' };
+    const { requestId, decision, signature } =
+      req.body as { requestId?: string; decision?: 'APPROVED' | 'DENIED'; signature?: string };
 
     if (!requestId || !decision || !['APPROVED', 'DENIED'].includes(decision)) {
       res.status(400).json({ error: 'requestId and decision (APPROVED|DENIED) are required' });
+      return;
+    }
+    if (!signature) {
+      res.status(400).json({ error: 'signature is required' });
       return;
     }
 
@@ -532,8 +539,46 @@ router.post('/approval/decide', requireAuthenticated, async (req: Request, res: 
       return;
     }
 
-    approval.status     = decision;
-    approval.resolvedAt = new Date();
+    // Verify approver's DBK signature over canonical payload
+    const payload = [
+      'DLA-APPROVAL', 'v1',
+      requestId,
+      approval.requestingDeviceId,
+      approval.approverDeviceId,
+      approval.loginAttemptId,
+      decision,
+      approval.approvalNonce,
+    ].join('|');
+
+    const approverProfile = await DeviceProfile.findOne({ userId: approval.userId, deviceId: auth.deviceId, status: 'TRUSTED' });
+    if (!approverProfile) {
+      res.status(403).json({ error: 'Approver device profile not found' });
+      return;
+    }
+    const approverKey = JSON.parse(approverProfile.dbkPublicKey) as object;
+    const sigValid    = verifyDbkSignatureOverMessage(approverKey, payload, signature);
+
+    if (!sigValid) {
+      await logger.audit({
+        event:        'APPROVAL_SIGNATURE_INVALID',
+        severity:     'CRITICAL',
+        userId:       auth.userId,
+        username:     auth.username,
+        deviceId:     auth.deviceId,
+        ip:           req.ip,
+        userAgent:    req.headers['user-agent'],
+        message:      'DBK signature verification failed on approval/decide — possible forged approval',
+        attackVector: 'forged_approval',
+        mitigated:    true,
+      });
+      res.status(403).json({ error: 'Invalid DBK signature' });
+      return;
+    }
+
+    approval.status           = decision;
+    approval.resolvedAt       = new Date();
+    approval.approvalSignature = signature;
+    approval.decisionPayload  = payload;
     await approval.save();
 
     const userObjId  = approval.userId;
