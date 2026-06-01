@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import java.lang.ref.WeakReference
+import com.example.dlaauth.model.ApprovalDecision
 import com.example.dlaauth.model.ApprovalRequestItem
 import com.example.dlaauth.model.ClientMetrics
 import com.example.dlaauth.model.DeviceFinalizeRequest
@@ -465,11 +466,19 @@ class DLAAuthManager(application: Application) : AndroidViewModel(application) {
         _dbkStatus.value = getDBKStatus(context, precomputedLevel)
     }
 
-    fun approveDevice(requestId: String) {
+    fun approveDevice(item: ApprovalRequestItem) {
         viewModelScope.launch {
             try {
-                apiClient.approvalDecide(requestId, "APPROVED")
-                log("Device approved", LogType.SUCCESS)
+                val ctx: Context = getApplication()
+                val canonical = buildCanonical("APPROVED", item.requestId, item.loginAttemptId)
+                val signature = dbkService.signMessage(canonical, ctx)
+                apiClient.approvalDecide(ApprovalDecision(
+                    requestId = item.requestId,
+                    decision = "APPROVED",
+                    signature = signature,
+                    canonicalPayload = canonical,
+                ))
+                log("Device approved (signed)", LogType.SUCCESS)
                 startApprovalPolling()
             } catch (e: Exception) {
                 log("Approve failed: ${e.message}", LogType.ERROR)
@@ -477,17 +486,29 @@ class DLAAuthManager(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun denyDevice(requestId: String) {
+    fun denyDevice(item: ApprovalRequestItem) {
         viewModelScope.launch {
             try {
-                apiClient.approvalDecide(requestId, "DENIED")
-                log("Device denied", LogType.INFO)
+                val ctx: Context = getApplication()
+                val canonical = buildCanonical("DENIED", item.requestId, item.loginAttemptId)
+                val signature = dbkService.signMessage(canonical, ctx)
+                apiClient.approvalDecide(ApprovalDecision(
+                    requestId = item.requestId,
+                    decision = "DENIED",
+                    signature = signature,
+                    canonicalPayload = canonical,
+                ))
+                log("Device denied (signed)", LogType.INFO)
                 startApprovalPolling()
             } catch (e: Exception) {
                 log("Deny failed: ${e.message}", LogType.ERROR)
             }
         }
     }
+
+    private fun buildCanonical(decision: String, requestId: String, loginAttemptId: String?): String =
+        if (loginAttemptId != null) "$decision:$requestId:$loginAttemptId"
+        else "$decision:$requestId"
 
     fun resetDBK() {
         viewModelScope.launch {
