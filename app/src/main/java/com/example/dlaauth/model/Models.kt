@@ -141,6 +141,7 @@ data class DeviceVerifyResponse(
 data class ApprovalRequestItem(
     val requestId: String,
     val requestingDeviceId: String,
+    val loginAttemptId: String? = null,
     val requestContext: DeviceSignals? = null,
     val expiresAt: String? = null,
     val createdAt: String? = null,
@@ -149,6 +150,8 @@ data class ApprovalRequestItem(
 data class ApprovalDecision(
     val requestId: String,
     val decision: String,
+    val signature: String,
+    val canonicalPayload: String,
 )
 
 // ---------------------------------------------------------------------------

@@ -132,6 +132,24 @@ class KeyStoreDBKService {
         return encoded
     }
 
+    fun signMessage(message: String, context: Context): String {
+        val messageBytes = message.toByteArray(Charsets.UTF_8)
+        Log.d(TAG, "Signing message: ${message.take(32)}… (${messageBytes.size} bytes)")
+
+        val keyStore = KeyStore.getInstance("AndroidKeyStore").also { it.load(null) }
+        val privateKey = keyStore.getKey(KEY_ALIAS, null) as java.security.PrivateKey
+
+        val sig = Signature.getInstance("SHA256withECDSA")
+        sig.initSign(privateKey)
+        sig.update(messageBytes)
+        val derSig = sig.sign()
+
+        val rawSig = Base64Util.derSignatureToRaw(derSig)
+        val encoded = Base64Util.base64urlEncode(rawSig)
+        Log.d(TAG, "Message signature: ${encoded.take(16)}…")
+        return encoded
+    }
+
     fun deleteKey() {
         val keyStore = KeyStore.getInstance("AndroidKeyStore").also { it.load(null) }
         keyStore.deleteEntry(KEY_ALIAS)
