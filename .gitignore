@@ -1,3 +1,4 @@
+# ── Android ───────────────────────────────────────────────────────────────────
 *.iml
 .gradle
 /local.properties
@@ -7,9 +8,27 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
-.DS_Store
 /build
 /captures
 .externalNativeBuild
 .cxx
 local.properties
+
+# ── Node / Backend ────────────────────────────────────────────────────────────
+backend/node_modules/
+backend/dist/
+backend/*.js.map
+backend/*.d.ts.map
+backend/.env
+backend/.env.*
+!backend/.env.example
+backend/detection_results_*.json
+
+# ── iOS ───────────────────────────────────────────────────────────────────────
+ios/Pods/
+ios/*.xcworkspace/xcuserdata/
+ios/DerivedData/
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db

@@ -1,0 +1,13 @@
+[{
+  "relation": [
+    "delegate_permission/common.handle_all_urls",
+    "delegate_permission/common.get_login_creds"
+  ],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.example.dlaauth",
+    "sha256_cert_fingerprints": [
+      "AB:54:C4:E7:55:39:18:96:76:8E:9E:43:5D:6A:19:38:10:49:4F:37:C9:75:23:C0:F4:8D:F6:A6:0A:F3:97:70"
+    ]
+  }
+}]

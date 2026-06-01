@@ -1,0 +1,930 @@
+{
+  "timestamp": "2026-05-13T07:27:01.285Z",
+  "baseUrl": "https://dla.metaauth.site",
+  "runId": "cb4fedd7",
+  "iterationsPerUc": 30,
+  "totalIterations": 120,
+  "useCases": [
+    {
+      "id": "UC1",
+      "name": "Legitimate trusted login",
+      "type": "benign",
+      "expected": "ALLOW",
+      "correct": 30,
+      "incorrect": 0,
+      "accuracy": 100,
+      "latency": {
+        "min": 191,
+        "max": 302,
+        "mean": 202,
+        "p50": 195,
+        "p95": 253
+      },
+      "iterations": [
+        {
+          "iteration": 1,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 302
+        },
+        {
+          "iteration": 2,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 197
+        },
+        {
+          "iteration": 3,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 199
+        },
+        {
+          "iteration": 4,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 203
+        },
+        {
+          "iteration": 5,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 216
+        },
+        {
+          "iteration": 6,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 206
+        },
+        {
+          "iteration": 7,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 195
+        },
+        {
+          "iteration": 8,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 208
+        },
+        {
+          "iteration": 9,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 191
+        },
+        {
+          "iteration": 10,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 192
+        },
+        {
+          "iteration": 11,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 196
+        },
+        {
+          "iteration": 12,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 197
+        },
+        {
+          "iteration": 13,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 195
+        },
+        {
+          "iteration": 14,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 193
+        },
+        {
+          "iteration": 15,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 192
+        },
+        {
+          "iteration": 16,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 194
+        },
+        {
+          "iteration": 17,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 200
+        },
+        {
+          "iteration": 18,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 196
+        },
+        {
+          "iteration": 19,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 200
+        },
+        {
+          "iteration": 20,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 193
+        },
+        {
+          "iteration": 21,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 200
+        },
+        {
+          "iteration": 22,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 253
+        },
+        {
+          "iteration": 23,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 194
+        },
+        {
+          "iteration": 24,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 194
+        },
+        {
+          "iteration": 25,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 194
+        },
+        {
+          "iteration": 26,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 192
+        },
+        {
+          "iteration": 27,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 195
+        },
+        {
+          "iteration": 28,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 193
+        },
+        {
+          "iteration": 29,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 195
+        },
+        {
+          "iteration": 30,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 196
+        }
+      ]
+    },
+    {
+      "id": "UC2",
+      "name": "Legitimate new device with approval",
+      "type": "benign",
+      "expected": "ALLOW",
+      "correct": 30,
+      "incorrect": 0,
+      "accuracy": 100,
+      "latency": {
+        "min": 478,
+        "max": 621,
+        "mean": 506,
+        "p50": 494,
+        "p95": 549
+      },
+      "iterations": [
+        {
+          "iteration": 1,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 506
+        },
+        {
+          "iteration": 2,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 491
+        },
+        {
+          "iteration": 3,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 506
+        },
+        {
+          "iteration": 4,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 495
+        },
+        {
+          "iteration": 5,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 549
+        },
+        {
+          "iteration": 6,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 496
+        },
+        {
+          "iteration": 7,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 542
+        },
+        {
+          "iteration": 8,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 513
+        },
+        {
+          "iteration": 9,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 494
+        },
+        {
+          "iteration": 10,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 485
+        },
+        {
+          "iteration": 11,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 498
+        },
+        {
+          "iteration": 12,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 489
+        },
+        {
+          "iteration": 13,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 491
+        },
+        {
+          "iteration": 14,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 491
+        },
+        {
+          "iteration": 15,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 494
+        },
+        {
+          "iteration": 16,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 478
+        },
+        {
+          "iteration": 17,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 533
+        },
+        {
+          "iteration": 18,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 486
+        },
+        {
+          "iteration": 19,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 493
+        },
+        {
+          "iteration": 20,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 494
+        },
+        {
+          "iteration": 21,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 492
+        },
+        {
+          "iteration": 22,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 486
+        },
+        {
+          "iteration": 23,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 521
+        },
+        {
+          "iteration": 24,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 499
+        },
+        {
+          "iteration": 25,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 545
+        },
+        {
+          "iteration": 26,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 621
+        },
+        {
+          "iteration": 27,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 490
+        },
+        {
+          "iteration": 28,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 481
+        },
+        {
+          "iteration": 29,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 490
+        },
+        {
+          "iteration": 30,
+          "outcome": "ALLOW",
+          "expected": "ALLOW",
+          "correct": true,
+          "latencyMs": 524
+        }
+      ]
+    },
+    {
+      "id": "UC3",
+      "name": "Cloud compromise attack",
+      "type": "adversarial",
+      "expected": "BLOCK",
+      "correct": 30,
+      "incorrect": 0,
+      "accuracy": 100,
+      "latency": {
+        "min": 246,
+        "max": 298,
+        "mean": 259,
+        "p50": 251,
+        "p95": 289
+      },
+      "iterations": [
+        {
+          "iteration": 1,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 275
+        },
+        {
+          "iteration": 2,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 256
+        },
+        {
+          "iteration": 3,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 275
+        },
+        {
+          "iteration": 4,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 250
+        },
+        {
+          "iteration": 5,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 249
+        },
+        {
+          "iteration": 6,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 250
+        },
+        {
+          "iteration": 7,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 247
+        },
+        {
+          "iteration": 8,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 247
+        },
+        {
+          "iteration": 9,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 246
+        },
+        {
+          "iteration": 10,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 253
+        },
+        {
+          "iteration": 11,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 298
+        },
+        {
+          "iteration": 12,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 273
+        },
+        {
+          "iteration": 13,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 260
+        },
+        {
+          "iteration": 14,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 254
+        },
+        {
+          "iteration": 15,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 255
+        },
+        {
+          "iteration": 16,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 251
+        },
+        {
+          "iteration": 17,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 250
+        },
+        {
+          "iteration": 18,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 256
+        },
+        {
+          "iteration": 19,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 250
+        },
+        {
+          "iteration": 20,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 289
+        },
+        {
+          "iteration": 21,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 248
+        },
+        {
+          "iteration": 22,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 251
+        },
+        {
+          "iteration": 23,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 276
+        },
+        {
+          "iteration": 24,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 249
+        },
+        {
+          "iteration": 25,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 251
+        },
+        {
+          "iteration": 26,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 246
+        },
+        {
+          "iteration": 27,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 246
+        },
+        {
+          "iteration": 28,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 275
+        },
+        {
+          "iteration": 29,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 265
+        },
+        {
+          "iteration": 30,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 279
+        }
+      ]
+    },
+    {
+      "id": "UC4",
+      "name": "Approval denial by trusted user",
+      "type": "adversarial",
+      "expected": "BLOCK",
+      "correct": 30,
+      "incorrect": 0,
+      "accuracy": 100,
+      "latency": {
+        "min": 469,
+        "max": 581,
+        "mean": 490,
+        "p50": 479,
+        "p95": 551
+      },
+      "iterations": [
+        {
+          "iteration": 1,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 500
+        },
+        {
+          "iteration": 2,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 478
+        },
+        {
+          "iteration": 3,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 495
+        },
+        {
+          "iteration": 4,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 478
+        },
+        {
+          "iteration": 5,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 473
+        },
+        {
+          "iteration": 6,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 510
+        },
+        {
+          "iteration": 7,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 513
+        },
+        {
+          "iteration": 8,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 500
+        },
+        {
+          "iteration": 9,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 469
+        },
+        {
+          "iteration": 10,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 551
+        },
+        {
+          "iteration": 11,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 474
+        },
+        {
+          "iteration": 12,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 469
+        },
+        {
+          "iteration": 13,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 477
+        },
+        {
+          "iteration": 14,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 471
+        },
+        {
+          "iteration": 15,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 474
+        },
+        {
+          "iteration": 16,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 472
+        },
+        {
+          "iteration": 17,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 486
+        },
+        {
+          "iteration": 18,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 476
+        },
+        {
+          "iteration": 19,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 507
+        },
+        {
+          "iteration": 20,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 581
+        },
+        {
+          "iteration": 21,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 486
+        },
+        {
+          "iteration": 22,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 475
+        },
+        {
+          "iteration": 23,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 486
+        },
+        {
+          "iteration": 24,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 480
+        },
+        {
+          "iteration": 25,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 479
+        },
+        {
+          "iteration": 26,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 497
+        },
+        {
+          "iteration": 27,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 479
+        },
+        {
+          "iteration": 28,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 476
+        },
+        {
+          "iteration": 29,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 469
+        },
+        {
+          "iteration": 30,
+          "outcome": "BLOCK",
+          "expected": "BLOCK",
+          "correct": true,
+          "latencyMs": 525
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "detectionRate": 100,
+    "falsePositiveRate": 0,
+    "overallAccuracy": 100,
+    "tp": 60,
+    "fn": 0,
+    "tn": 60,
+    "fp": 0
+  }
+}
