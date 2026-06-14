@@ -470,7 +470,7 @@ class DLAAuthManager(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             try {
                 val ctx: Context = getApplication()
-                val canonical = buildCanonical("APPROVED", item.requestId, item.loginAttemptId)
+                val canonical = buildCanonical(item, "APPROVED")
                 val signature = dbkService.signMessage(canonical, ctx)
                 apiClient.approvalDecide(ApprovalDecision(
                     requestId = item.requestId,
@@ -490,7 +490,7 @@ class DLAAuthManager(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             try {
                 val ctx: Context = getApplication()
-                val canonical = buildCanonical("DENIED", item.requestId, item.loginAttemptId)
+                val canonical = buildCanonical(item, "DENIED")
                 val signature = dbkService.signMessage(canonical, ctx)
                 apiClient.approvalDecide(ApprovalDecision(
                     requestId = item.requestId,
@@ -506,9 +506,19 @@ class DLAAuthManager(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    private fun buildCanonical(decision: String, requestId: String, loginAttemptId: String?): String =
-        if (loginAttemptId != null) "$decision:$requestId:$loginAttemptId"
-        else "$decision:$requestId"
+    // Must match the server's canonical payload in routes/device.ts
+    // (POST /api/device/approval/decide) byte-for-byte, since the server
+    // rebuilds and verifies this exact string against the approver's DBK key.
+    private fun buildCanonical(item: ApprovalRequestItem, decision: String): String =
+        listOf(
+            "DLA-APPROVAL", "v1",
+            item.requestId,
+            item.requestingDeviceId,
+            item.approverDeviceId ?: "",
+            item.loginAttemptId ?: "",
+            decision,
+            item.approvalNonce ?: "",
+        ).joinToString("|")
 
     fun resetDBK() {
         viewModelScope.launch {
