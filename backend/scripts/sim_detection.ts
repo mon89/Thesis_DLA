@@ -100,6 +100,46 @@ function sign(privateKey: crypto.KeyObject, challenge: string): string {
     .toString('base64url');
 }
 
+function signMessage(privateKey: crypto.KeyObject, message: string): string {
+  return crypto
+    .sign('sha256', Buffer.from(message, 'utf8'), { key: privateKey, dsaEncoding: 'ieee-p1363' })
+    .toString('base64url');
+}
+
+interface PendingApproval {
+  requestId:          string;
+  requestingDeviceId: string;
+  approverDeviceId:   string;
+  loginAttemptId:     string;
+  approvalNonce:      string;
+}
+
+function approvalPayload(p: PendingApproval, decision: 'APPROVED' | 'DENIED'): string {
+  return [
+    'DLA-APPROVAL', 'v1',
+    p.requestId,
+    p.requestingDeviceId,
+    p.approverDeviceId,
+    p.loginAttemptId,
+    decision,
+    p.approvalNonce,
+  ].join('|');
+}
+
+async function decideApproval(
+  approverKey: crypto.KeyObject,
+  decision:    'APPROVED' | 'DENIED',
+  jar:         CookieJar,
+): Promise<void> {
+  const { data } = await apiGet<{ pending: PendingApproval[] }>(
+    '/api/device/approval/pending', jar,
+  );
+  const p = data.pending[0];
+  if (!p) throw new Error('no pending approval');
+  const signature = signMessage(approverKey, approvalPayload(p, decision));
+  await apiPost('/api/device/approval/decide', { requestId: p.requestId, decision, signature }, jar);
+}
+
 // ── Shared primitives ─────────────────────────────────────────────────────────
 
 async function simulatePasskey(jar: CookieJar, username: string): Promise<void> {
@@ -192,12 +232,7 @@ async function uc2_legitimateNewDevice(i: number): Promise<'ALLOW' | 'BLOCK'> {
   const jA = new CookieJar();
   await simulatePasskey(jA, u);
   await challengeAndVerify(kp1, jA);
-  const { data: pending } = await apiGet<{ pending: { requestId: string }[] }>(
-    '/api/device/approval/pending', jA,
-  );
-  const req = pending.pending[0];
-  if (!req) throw new Error('no pending approval');
-  await apiPost('/api/device/approval/decide', { requestId: req.requestId, decision: 'APPROVED' }, jA);
+  await decideApproval(kp1.privateKey, 'APPROVED', jA);
 
   // Device 2 finalizes: fresh /challenge then /finalize
   // j2 still has passkeyVerified — NEW_DEVICE flow does not clear it
@@ -250,12 +285,7 @@ async function uc4_approvalDenial(i: number): Promise<'ALLOW' | 'BLOCK'> {
   const jA = new CookieJar();
   await simulatePasskey(jA, u);
   await challengeAndVerify(kp1, jA);
-  const { data: pending } = await apiGet<{ pending: { requestId: string }[] }>(
-    '/api/device/approval/pending', jA,
-  );
-  const req = pending.pending[0];
-  if (!req) throw new Error('no pending approval');
-  await apiPost('/api/device/approval/decide', { requestId: req.requestId, decision: 'DENIED' }, jA);
+  await decideApproval(kp1.privateKey, 'DENIED', jA);
 
   // Suspect device retries — must be BLOCKED (REJECTED)
   const jRetry = new CookieJar();
