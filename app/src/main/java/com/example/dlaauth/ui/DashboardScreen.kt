@@ -122,8 +122,8 @@ fun DashboardScreen(authManager: DLAAuthManager) {
 
             PendingApprovalsSection(
                 pendingApprovals = pendingApprovals,
-                onApprove = { requestId -> authManager.approveDevice(requestId) },
-                onDeny = { requestId -> authManager.denyDevice(requestId) },
+                onApprove = { item -> authManager.approveDevice(item) },
+                onDeny = { item -> authManager.denyDevice(item) },
             )
 
             Text(
@@ -159,8 +159,8 @@ fun DashboardScreen(authManager: DLAAuthManager) {
 @Composable
 fun PendingApprovalsSection(
     pendingApprovals: List<ApprovalRequestItem>,
-    onApprove: (String) -> Unit,
-    onDeny: (String) -> Unit,
+    onApprove: (ApprovalRequestItem) -> Unit,
+    onDeny: (ApprovalRequestItem) -> Unit,
 ) {
     if (pendingApprovals.isEmpty()) return
 
@@ -174,8 +174,8 @@ fun PendingApprovalsSection(
             pendingApprovals.forEach { approval ->
                 ApprovalCard(
                     item = approval,
-                    onApprove = { onApprove(approval.requestId) },
-                    onDeny = { onDeny(approval.requestId) },
+                    onApprove = { onApprove(approval) },
+                    onDeny = { onDeny(approval) },
                 )
                 Spacer(Modifier.height(4.dp))
             }

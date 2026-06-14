@@ -172,8 +172,8 @@ object APIClient {
         )
     }
 
-    suspend fun approvalDecide(requestId: String, decision: String): JsonObject =
-        parse(post("/api/device/approval/decide", ApprovalDecision(requestId, decision)))
+    suspend fun approvalDecide(request: ApprovalDecision): JsonObject =
+        parse(post("/api/device/approval/decide", request))
 
     suspend fun deviceList(): List<DeviceListItem> {
         val json = get("/api/device/list")
