@@ -141,7 +141,9 @@ data class DeviceVerifyResponse(
 data class ApprovalRequestItem(
     val requestId: String,
     val requestingDeviceId: String,
+    val approverDeviceId: String? = null,
     val loginAttemptId: String? = null,
+    val approvalNonce: String? = null,
     val requestContext: DeviceSignals? = null,
     val expiresAt: String? = null,
     val createdAt: String? = null,
