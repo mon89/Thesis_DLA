@@ -32,7 +32,7 @@ import okhttp3.Response
 
 object APIClient {
 
-    const val BASE_URL = "https://dla.metaauth.site"
+    const val BASE_URL = "https://metaauth.cysec.cs.ritsumei.ac.jp"
 
     private val JSON_MEDIA_TYPE = "application/json; charset=utf-8".toMediaType()
     private val gson = Gson()
