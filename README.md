@@ -1,8 +1,13 @@
- (cd "$(git rev-parse --show-toplevel)" && printf '%s' 'diff --git a/README.md b/README.md
-index 44e886b63431e9ac38d6e851f47133ba2656169c..1d23ee2e447fb642e0beffa5ef79dfaadd8ff81c 100644
---- a/README.md
-+++ b/README.md
-@@ -8,51 +8,51 @@ This repository contains the implementation and research for a master thesis pro
+# Passkey Authenticator
+
+A master thesis project implementing a modern passkey authentication system using TypeScript and Kotlin with advanced device enrollment an
+mechanisms.
+
+## Overview
+
+This repository contains the implementation and research for a master thesis project focused on passkey-based authentication. Passkeys pro
+passwordless, phishing-resistant authentication method that leverages cryptographic keys instead of traditional passwords. This project ex
+integration of passkey authentication across web and mobile platforms, with a sophisticated device enrollment and trust management system.
  
  ## Technology Stack
  
