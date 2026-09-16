@@ -93,7 +93,7 @@ The public JWK contains relatively long `x` and `y` coordinates. The 64-characte
  
  #### Challenge-Response Verification
  1. **Challenge Generation**: Server generates random `challenge`
-+2. **Client Signing**: Device signs the challenge using **ECDSA-SHA256** with its DBK private key and sends the signature in IEEE P1363 (`r || s`) format
+ 2. **Client Signing**: Device signs the challenge using **ECDSA-SHA256** with its DBK private key and sends the signature in IEEE P1363 (`r || s`) format
  3. **Server Verification**: 
     - Existing devices: Verify against **STORED** `dbkPublicKey` from database
     - New devices: Verify against key submitted at `/challenge` time (session-stored, never from request body)
