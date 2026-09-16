@@ -145,8 +145,6 @@ The public JWK contains relatively long `x` and `y` coordinates. The 64-characte
  │   │   ├── test-flow.ts           # Integration tests
  │   │   └── sim_detection.ts       # Attack simulation tests
  │   └── server.ts                  # Express server setup
--├── kotlin/                         # Android app implementation
--│── typescript/                     # Web frontend implementation
 +├── app/                            # Kotlin/Jetpack Compose Android application
 +├── public/                         # Small static browser landing page
  └── docs/                          # Documentation and research materials
