@@ -16,7 +16,7 @@ This repository contains the implementation and research for a master thesis pro
  ## Key Features
  
  - **Passwordless Authentication** - Secure authentication without passwords
- - **Cross-Platform Support** - Web application (TypeScript) and Android app (Kotlin)
+ - **Backend and Android Demonstrator** - TypeScript , Android Studio
  - **FIDO2/WebAuthn Compliance** - Standards-based passkey implementation
  - **Device-Based Key Authentication (DBK)** - Cryptographic key per device for enrollment detection
  - **Smart Device Detection** - Automatically detects new vs. enrolled devices using DBK signatures
@@ -31,11 +31,20 @@ This repository contains the implementation and research for a master thesis pro
  The core innovation is the **Device-Based Key (DBK)** system that detects whether a device is new or already enrolled:
  
  #### Device Identification (DBK Public Key)
--- Each device generates a unique **Ed25519 key pair**
-+- Each Android device generates a unique **P-256 EC key pair** in Android Keystore (StrongBox when available, otherwise TEE)
+- Each Android device generates a unique **P-256 EC key pair** in Android Keystore (StrongBox when available, otherwise TEE)
  - A `deviceId` is computed as `SHA-256(DBK Public Key)` - deterministic and unique per device
  - The `dbkPublicKey` is stored in the server database when a device is first enrolled
- 
+
+The public JWK contains relatively long `x` and `y` coordinates. The 64-character hexadecimal `deviceId` is a compact, deterministic database identifier: the same canonical public key always produces the same ID, while the private key is never included in that calculation or sent to the server.
+
+| Where `deviceId` is used | Purpose |
+|---|---|
+| `DeviceProfile.deviceId` | Find the profile associated with a DBK |
+| `DeviceProfile.approvedBy.deviceId` | Record which trusted device approved enrollment |
+| `ApprovalRequest.requestingDeviceId` | Identify the device requesting enrollment |
+| `ApprovalRequest.approverDeviceId` | Bind a decision to the selected trusted device |
+| `session.authenticated.deviceId` | Bind the authenticated session to the verified device |
+
  #### Device Status Tracking
  The system maintains device profiles with four states:
  
@@ -84,7 +93,6 @@ This repository contains the implementation and research for a master thesis pro
  
  #### Challenge-Response Verification
  1. **Challenge Generation**: Server generates random `challenge`
--2. **Client Signing**: Device signs challenge using **DBK Private Key** → Ed25519 signature
 +2. **Client Signing**: Device signs the challenge using **ECDSA-SHA256** with its DBK private key and sends the signature in IEEE P1363 (`r || s`) format
  3. **Server Verification**: 
     - Existing devices: Verify against **STORED** `dbkPublicKey` from database
