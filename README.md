@@ -9,9 +9,9 @@ This repository contains the implementation and research for a master thesis pro
  
  ## Technology Stack
  
- - **TypeScript** (58.2%) - Web-based authentication interface and API implementation
- - **Kotlin** (41.6%) - Android mobile app and backend services
- - **Other** (0.2%) - Configuration and utility files
+ - **TypeScript** - Node.js/Express authentication API, MongoDB models, logging, and evaluation routes
+- **Kotlin** - Android/Jetpack Compose authenticator demonstration app
+- **Other** - Deployment association files, Gradle configuration, and a small static page
  
  ## Key Features
  
