@@ -125,38 +125,8 @@ The public JWK contains relatively long `x` and `y` coordinates. The 64-characte
  
  These signals help detect anomalies and potential device spoofing.
  
- ## Project Structure
- 
- ```
- Thesis_DLA/
- ├── backend/
- │   ├── routes/
- │   │   ├── device.ts              # Device enrollment/verification endpoints
- │   │   ├── webauthn.ts            # Passkey registration/authentication
- │   │   └── api.ts                 # General API endpoints
- │   ├── models/
- │   │   ├── DeviceProfile.ts       # Device record schema
- │   │   ├── ApprovalRequest.ts     # Enrollment approval requests
- │   │   └── User.ts                # User account schema
- │   ├── utils/
- │   │   ├── crypto.ts              # DBK signing/verification, device ID computation
- │   │   └── logger.ts              # Security audit logging
- │   ├── scripts/
- │   │   ├── test-flow.ts           # Integration tests
- │   │   └── sim_detection.ts       # Attack simulation tests
- │   └── server.ts                  # Express server setup
-+├── app/                            # Kotlin/Jetpack Compose Android application
-+├── public/                         # Small static browser landing page
- └── docs/                          # Documentation and research materials
- ```
- 
- ## Getting Started
- 
  ### Prerequisites
  
--- **TypeScript/Node.js** (for web components)
--  - Node.js 16.x or higher
--  - npm or yarn package manager
 +- A VPS or other publicly reachable Linux server
 +- A real domain name whose DNS record points to that server
 +- A valid TLS/SSL certificate for the domain (for example, from Let'\''s Encrypt)
