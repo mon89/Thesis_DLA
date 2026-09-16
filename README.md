@@ -5,9 +5,7 @@ mechanisms.
 
 ## Overview
 
-This repository contains the implementation and research for a master thesis project focused on passkey-based authentication. Passkeys pro
-passwordless, phishing-resistant authentication method that leverages cryptographic keys instead of traditional passwords. This project ex
-integration of passkey authentication across web and mobile platforms, with a sophisticated device enrollment and trust management system.
+This repository contains the implementation and research for a master thesis project focused on a risk introduced by synchronized passkeys: a valid passkey can prove the user account while being used from a device that the relying party has never trusted. Passkeys provide passwordless, phishing-resistant user authentication; the additional Device Legitimacy Assessment (DLA) layer studies device enrollment and trust management for that multi-device case.
  
  ## Technology Stack
  
